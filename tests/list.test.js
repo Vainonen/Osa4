@@ -9,7 +9,7 @@ test('dummy is called', () => {
 })
 */
 
-describe.skip('total likes', () => {
+describe('total likes', () => {
     const blogs = [
         {
           _id: "5a422a851b54a676234d17f7",

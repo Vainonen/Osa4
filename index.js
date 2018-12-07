@@ -6,6 +6,8 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const middleware = require('./utils/middleware')
 const blogRouter = require('./controllers/blogs')
+const usersRouter = require('./controllers/users')
+const loginRouter = require('./controllers/login')
 const config = require('./utils/config')
 
 
@@ -30,6 +32,7 @@ mongoose
   console.log('connected to database', config.mongoUrl)
 })
 .catch( err => {
+  console.log(config.mongoUrl)
   console.log(err)
 })
 
@@ -39,13 +42,15 @@ app.use(express.static('build'))
 app.use(middleware.logger)
 
 app.use('/api/blogs', blogRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
 
 app.use(middleware.error)
 
 const server = http.createServer(app)
 
 server.listen(config.port, () => {
-  console.log(`Server running on port ${config.port}`)
+  console.log('Server running on port ' + config.port)
 })
 
 server.on('close', () => {
